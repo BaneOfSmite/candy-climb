@@ -1,0 +1,14 @@
+Platform distance = 0.015 Y
+
+
+Incriment of 30 degrees [X Rotation]
+
+-1.5 to 1.5 Z
+
+
+
+Every 50 floor = boss?
+
+Items/collectables:
+
+Lolipop = +jump meter
