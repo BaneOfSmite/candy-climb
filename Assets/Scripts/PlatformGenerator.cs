@@ -17,6 +17,9 @@ public class PlatformGenerator : MonoBehaviour {
             spawned.transform.localScale = new Vector3(1, 1, 1);
             spawned.transform.localPosition = new Vector3(0, spawnHeight, Random.Range(-1.5f, 1.5f));
             spawnHeight += 3.85f; //3.85 slowly increase to 15
+            if (spawnHeight > 73.2f) {
+                break;
+            }
         }
     }
 }
