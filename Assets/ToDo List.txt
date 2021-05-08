@@ -1,4 +1,4 @@
-Platform distance = 0.015 Y
+Platform distance = 3.85 - 15 Maxxed Y
 
 
 Incriment of 30 degrees [X Rotation]
