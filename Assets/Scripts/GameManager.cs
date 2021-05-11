@@ -34,6 +34,9 @@ public class GameManager : MonoBehaviour {
 
         if (gameState == gameStates.Idle && Input.GetKeyDown(KeyCode.Space)) {
             gameState = gameStates.inGame;
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            player.GetComponent<Rigidbody>().useGravity = true;
+            player.GetComponent<Rigidbody>().AddForce(new Vector3(0, 1, 0) * 5f, ForceMode.Impulse);
         }
     }
 }
