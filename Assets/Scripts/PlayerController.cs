@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider other) {
-        if (GameManager.instance.gameState == GameManager.gameStates.inGame) {
+        if (GameManager.instance.gameState == GameManager.gameStates.inGame && other.gameObject.CompareTag("Platform")) {
             GetComponent<Animator>().SetTrigger("Jump");
             GetComponent<Rigidbody>().velocity = new Vector3(0, 1 * jumpHeight, 0);
         }
