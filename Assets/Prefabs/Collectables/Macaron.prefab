@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8940693191896447104
+--- !u!1 &5390704332140771522
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8940693191896447116}
-  - component: {fileID: 8940693191896447119}
-  - component: {fileID: 8940693191896447118}
-  - component: {fileID: 8940693191896447105}
-  - component: {fileID: 6396936664418407808}
-  m_Layer: 8
-  m_Name: Platform (3)
-  m_TagString: Platform
+  - component: {fileID: 5390704332141192418}
+  - component: {fileID: 5390704332139865282}
+  - component: {fileID: 5390704332138767874}
+  - component: {fileID: 5390704332134471266}
+  - component: {fileID: 5390704332140771521}
+  m_Layer: 0
+  m_Name: Macaron
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8940693191896447116
+--- !u!4 &5390704332141192418
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8940693191896447104}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -3.445, y: 3.45, z: -13.0305}
-  m_LocalScale: {x: 25, y: 25, z: 25}
+  m_GameObject: {fileID: 5390704332140771522}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.7611079, y: 0.014723957, z: 2.652423}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!33 &8940693191896447119
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &5390704332139865282
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8940693191896447104}
-  m_Mesh: {fileID: 4300000, guid: 13f45c7cc29477848b097bc8fee7d136, type: 2}
---- !u!23 &8940693191896447118
+  m_GameObject: {fileID: 5390704332140771522}
+  m_Mesh: {fileID: 4300000, guid: 6e6c8be41f3d8436f9127c39d1c92ace, type: 3}
+--- !u!23 &5390704332138767874
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8940693191896447104}
+  m_GameObject: {fileID: 5390704332140771522}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1d3885fa92418b248b8237a3c930fbc3, type: 2}
+  - {fileID: 2100000, guid: c84dda17c95484eaca9d29a983138b14, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -83,35 +83,31 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8940693191896447105
-BoxCollider:
+--- !u!64 &5390704332134471266
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8940693191896447104}
+  m_GameObject: {fileID: 5390704332140771522}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.05, z: 0.05}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6396936664418407808
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 6e6c8be41f3d8436f9127c39d1c92ace, type: 3}
+--- !u!114 &5390704332140771521
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8940693191896447104}
+  m_GameObject: {fileID: 5390704332140771522}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7297cbc3118c5714693f4bcb921544d9, type: 3}
+  m_Script: {fileID: 11500000, guid: ac557e15c02b878439525301d1ea9e83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectablesObject:
-  - {fileID: 5851681717665889916, guid: a31af9824b50c8143b1eca411b47d7f4, type: 3}
-  - {fileID: 784723897352443547, guid: 7530d306bfdf0ca4390383a2dfbdaa8f, type: 3}
-  - {fileID: 5978470022007126163, guid: ebf0b9c86c4da744885c29cf5b452b74, type: 3}
-  - {fileID: 727684307078191926, guid: 159d0e8692b8a16419a42371e17b17be, type: 3}
-  - {fileID: 7300018414725380641, guid: f444f31bb336cd646b5c20e3b5a2f6af, type: 3}
-  - {fileID: 5390704332140771522, guid: 0bfa32b4bb637c04eac0822a74c04e1d, type: 3}
+  currentType: 0
+  color: []
