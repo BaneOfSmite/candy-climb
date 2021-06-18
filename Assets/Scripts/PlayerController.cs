@@ -18,9 +18,9 @@ public class PlayerController : MonoBehaviour {
             GameManager.instance.score = Mathf.FloorToInt(transform.position.y);
         }
 
-        if (Input.GetAxis("Horizontal") > 0) {
+        if (Input.GetAxis("Horizontal") > 0 || Input.acceleration.x > 0.1) {
             GetComponent<SpriteRenderer>().flipX = false;
-        } else if (Input.GetAxis("Horizontal") < 0) {
+        } else if (Input.GetAxis("Horizontal") < 0 || Input.acceleration.x < -0.1) {
             GetComponent<SpriteRenderer>().flipX = true;
         }
 

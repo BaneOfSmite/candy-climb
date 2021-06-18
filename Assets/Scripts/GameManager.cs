@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour {
             difficulity = 2;
         }
 
-        if (gameState == gameStates.Idle && Input.GetKeyDown(KeyCode.Space)) {
+        if (gameState == gameStates.Idle && (Input.GetKeyDown(KeyCode.Space) || Input.touchCount > 0)) {
             gameState = gameStates.inGame;
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             player.GetComponent<Rigidbody>().useGravity = true;

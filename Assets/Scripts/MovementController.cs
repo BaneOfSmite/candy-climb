@@ -7,6 +7,9 @@ public class MovementController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        transform.Rotate(new Vector3(0, Input.GetAxisRaw("Horizontal") * -1, 0) * rotateSpeed);
+        transform.Rotate(new Vector3(0, Input.acceleration.x * -1, 0) * 0.3f);
+
+
+        //transform.Rotate(new Vector3(0, Input.GetAxisRaw("Horizontal") * -1, 0) * rotateSpeed);
     }
 }
