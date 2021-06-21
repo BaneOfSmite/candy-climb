@@ -29,17 +29,59 @@ public class PlayerController : MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider other) {
-        if (GameManager.instance.gameState == GameManager.gameStates.inGame && other.gameObject.CompareTag("Platform")) {
-            GetComponent<Animator>().SetTrigger("Jump");
+        print(other.GetType().Name);
+        if (GameManager.instance.gameState == GameManager.gameStates.inGame) {
+            if (other.gameObject.CompareTag("Platform")) {
+                GetComponent<Animator>().SetTrigger("Jump");
 
-            if (GetComponent<Rigidbody>().velocity.y < 0) {
-                GetComponent<AudioSource>().PlayOneShot(clips[0]);
-            } else {
-                GetComponent<AudioSource>().PlayOneShot(clips[1]);
+                if (GetComponent<Rigidbody>().velocity.y < 0) {
+                    playSound(clips[0]);
+                } else {
+                    playSound(clips[1]);
+                }
+
+                GetComponent<Rigidbody>().velocity = new Vector3(0, 1 * jumpHeight, 0);
+            } else if (other.gameObject.CompareTag("Collectable")) {
+                switch (other.gameObject.GetComponent<Collectable>().currentType) {
+
+                    //Good Collectables\\
+                    case Collectable.collectableNames.Cheesecake:
+                        playSound(clips[3]);
+                        //Sugar Rush Cheesecake
+                        break;
+                    case Collectable.collectableNames.Doughnut:
+                        playSound(clips[3]);
+                        //Sugar Rush Doughnut
+                        break;
+                    case Collectable.collectableNames.Macaron:
+                        playSound(clips[3]);
+                        //Sugar Rush Macaron
+                        break;
+
+                    //Bad Collectables\\
+                    case Collectable.collectableNames.Apple:
+                        playSound(clips[4]);
+                        //Sugar Rush Apple
+                        break;
+                    case Collectable.collectableNames.Carrot:
+                        playSound(clips[4]);
+                        //Sugar Rush Carrot
+                        break;
+                    case Collectable.collectableNames.Grape:
+                        playSound(clips[4]);
+                        //Sugar Rush Grape
+                        break;
+
+                }
+                //Spawn Collect Particle
+                Destroy(other.gameObject);
+
             }
-            
-            GetComponent<Rigidbody>().velocity = new Vector3(0, 1 * jumpHeight, 0);
         }
+    }
+
+    private void playSound(AudioClip _clip) {
+        GetComponent<AudioSource>().PlayOneShot(_clip);
     }
 }
 

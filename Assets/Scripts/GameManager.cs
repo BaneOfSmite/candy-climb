@@ -49,6 +49,8 @@ public class GameManager : MonoBehaviour {
 
     private void GameOver() {
         player.GetComponent<Rigidbody>().useGravity = false;
+        player.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+        player.GetComponent<AudioSource>().PlayOneShot(player.GetComponent<PlayerController>().clips[2]);
         //Score checking
         //Achievement checking
     }

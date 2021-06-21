@@ -967,6 +967,9 @@ MonoBehaviour:
   clips:
   - {fileID: 8300000, guid: 3951fb5075467b74d89aa2c3f7d88103, type: 3}
   - {fileID: 8300000, guid: 2ffd8de37e2ea244099cdfeb06ce0aaa, type: 3}
+  - {fileID: 8300000, guid: c77d69839e7d0834a9eecc8934a5b2d8, type: 3}
+  - {fileID: 8300000, guid: 681633ef01036d54c9f5df5801ee8d8d, type: 3}
+  - {fileID: 8300000, guid: 2a85ac777cfa54a438eac25270dac180, type: 3}
 --- !u!65 &1136688490
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -992,7 +995,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -2242698781168443971, guid: a73d338aa3909d7419963ee898f652e8, type: 2}
   m_audioClip: {fileID: 8300000, guid: 3951fb5075467b74d89aa2c3f7d88103, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
