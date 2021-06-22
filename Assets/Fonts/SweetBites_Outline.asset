@@ -113,11 +113,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: SweetBites SDF
+  m_Name: SweetBites_Outline
   m_EditorClassIdentifier: 
-  hashCode: -702409752
+  hashCode: 1514530502
   material: {fileID: -1509323975794436213}
-  materialHashCode: -718738104
+  materialHashCode: 1433334054
   m_Version: 1.1.0
   m_SourceFontFileGUID: a1bad305df53aa2429d096acb2b71df3
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: a1bad305df53aa2429d096acb2b71df3, type: 3}
@@ -1877,6 +1877,7 @@ MonoBehaviour:
   - {fileID: 8700425584762785258}
   m_AtlasTextureIndex: 0
   m_IsMultiAtlasTexturesEnabled: 0
+  m_ClearDynamicDataOnBuild: 0
   m_UsedGlyphRects:
   - m_X: 0
     m_Y: 0
