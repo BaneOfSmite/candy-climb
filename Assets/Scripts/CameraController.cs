@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour {
     private GameObject player;
     void Start() {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameManager.instance.player;
     }
 
     // Update is called once per frame

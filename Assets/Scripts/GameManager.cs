@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour {
     public GameObject player;//Player's Object
     void Start() {
         instance = this;
-        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame

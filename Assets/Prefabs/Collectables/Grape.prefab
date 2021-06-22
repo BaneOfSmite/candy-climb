@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7300018414725380642}
   - component: {fileID: -7348112376870006584}
   - component: {fileID: 5971781148678376122}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Grape
   m_TagString: Collectable
   m_Icon: {fileID: 0}

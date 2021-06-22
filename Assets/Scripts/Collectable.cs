@@ -13,4 +13,10 @@ public class Collectable : MonoBehaviour {
             Destroy(gameObject);
         }
     }
+
+    void OnTriggerEnter(Collider other) {
+        if (other.gameObject.CompareTag("Player")) {
+            PlayerController.instance.collectedCollectable(gameObject);
+        }
+    }
 }

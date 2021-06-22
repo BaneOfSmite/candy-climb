@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 727684307078191945}
   - component: {fileID: -2795160020153798509}
   - component: {fileID: 5100421352090769989}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Doughnut
   m_TagString: Collectable
   m_Icon: {fileID: 0}

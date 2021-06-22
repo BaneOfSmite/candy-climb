@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5390704332140771521}
   - component: {fileID: -3580317933945702703}
   - component: {fileID: 1881123959262884723}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Macaron
   m_TagString: Collectable
   m_Icon: {fileID: 0}

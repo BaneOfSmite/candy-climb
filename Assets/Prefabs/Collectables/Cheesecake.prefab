@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5978470022007126162}
   - component: {fileID: 6091976620660381986}
   - component: {fileID: -225781174536152866}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cheesecake
   m_TagString: Collectable
   m_Icon: {fileID: 0}
