@@ -5,7 +5,7 @@ using UnityEngine;
 public class Platform : MonoBehaviour {
     public GameObject[] collectablesObject;
     void Start() {
-        if (Random.Range(0, 100) < 15) { //Rng chance to spawn collectable
+        if (Random.Range(0, 100) < 5) { //Rng chance to spawn collectable
             Vector3 spawnLoc = transform.position + new Vector3(0, 0.05f, 0);
             GameObject spawned = Instantiate(collectablesObject[Random.Range(0, collectablesObject.Length)], spawnLoc, Quaternion.identity);
             spawned.transform.LookAt(new Vector3(0, transform.position.y, 0));
