@@ -2,20 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.Rendering.PostProcessing;
 
 public class GameManager : MonoBehaviour {
+    public PostProcessVolume volume;
     public enum gameStates {
         Idle, inGame, GameOver
     };
+    private enum sugarRushStatus {
+        Charging, Good, Bad
+    };
 
+    private sugarRushStatus rushStatus = sugarRushStatus.Charging;
     public gameStates gameState = gameStates.Idle;
 
     public int score;
     public int difficulity = 1;
     public static GameManager instance;
     public TextMeshProUGUI scoreUi;
-    public GameObject player, gameOverUI;//Player's Object
-    public float sugarRushValue = 0;
+    public GameObject player, gameOverUI, sugarRushBar;//Player's Object
+    public float sugarRushValue = 50;
 
     void Start() {
         instance = this;
@@ -57,12 +64,47 @@ public class GameManager : MonoBehaviour {
         //Achievement checking
     }
 
-    private void ManageSugarRush(int offSet) {
-        sugarRushValue += offSet;
-        if (sugarRushValue > 99) {
-            //Good
-        } else if (sugarRushValue < 1) {
-            //Bad
+    public void AddToSugarRush(float increment) {
+        if (rushStatus == sugarRushStatus.Charging) {
+            sugarRushValue += increment;
+            sugarRushBar.GetComponent<Slider>().value = Mathf.Clamp(sugarRushValue, 0, 100);
+            if (sugarRushValue > 99) {
+                rushStatus = sugarRushStatus.Good;
+                StartCoroutine("SugarRushEffect");
+                //Good
+            } else if (sugarRushValue < 1) {
+                rushStatus = sugarRushStatus.Bad;
+                StartCoroutine("SugarRushEffect");
+                //Bad
+            }
         }
     }
+
+    private IEnumerator SugarRushEffect() {
+        if (rushStatus == sugarRushStatus.Good) {
+            float currentJumpHeight = player.GetComponent<PlayerController>().jumpHeight;
+            player.GetComponent<PlayerController>().jumpHeight = 7.5f;
+            volume.profile.GetSetting<ChromaticAberration>().intensity.value = 1;
+            while (sugarRushValue >= 25) {
+                yield return new WaitForSeconds(0.2f);
+                sugarRushValue--;
+                sugarRushBar.GetComponent<Slider>().value = Mathf.Clamp(sugarRushValue, 0, 100);
+            }
+            volume.profile.GetSetting<ChromaticAberration>().intensity.value = 0;
+            player.GetComponent<PlayerController>().jumpHeight = currentJumpHeight;
+
+        } else {
+            GameObject.FindGameObjectWithTag("MovementController").GetComponent<MovementController>().isInvert = 1;
+            volume.profile.GetSetting<ColorGrading>().colorFilter.value = new Color(124f/255f, 200f/255f, 124f/255f);
+            while (sugarRushValue <= 50) {
+                yield return new WaitForSeconds(0.2f);
+                sugarRushValue++;
+                sugarRushBar.GetComponent<Slider>().value = Mathf.Clamp(sugarRushValue, 0, 100);
+            }
+            GameObject.FindGameObjectWithTag("MovementController").GetComponent<MovementController>().isInvert = -1;
+            volume.profile.GetSetting<ColorGrading>().colorFilter.value = new Color(1, 1, 1);
+        }
+        rushStatus = sugarRushStatus.Charging;
+    }
+
 }

@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour {
     //private CharacterController controller;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
-    public float jumpHeight = 3f;
+    public float jumpHeight = 5f;
 
     public AudioClip[] clips;
     public static PlayerController instance;
@@ -53,28 +53,34 @@ public class PlayerController : MonoBehaviour {
             //Good Collectables\\
             case Collectable.collectableNames.Cheesecake:
                 playSound(clips[3]);
+                GameManager.instance.AddToSugarRush(7.5f);
                 //Sugar Rush Cheesecake
                 break;
             case Collectable.collectableNames.Doughnut:
                 playSound(clips[3]);
+                GameManager.instance.AddToSugarRush(5);
                 //Sugar Rush Doughnut
                 break;
             case Collectable.collectableNames.Macaron:
                 playSound(clips[3]);
+                GameManager.instance.AddToSugarRush(10);
                 //Sugar Rush Macaron
                 break;
 
             //Bad Collectables\\
             case Collectable.collectableNames.Apple:
                 playSound(clips[4]);
+                GameManager.instance.AddToSugarRush(-10);
                 //Sugar Rush Apple
                 break;
             case Collectable.collectableNames.Carrot:
                 playSound(clips[4]);
+                GameManager.instance.AddToSugarRush(-12.5f);
                 //Sugar Rush Carrot
                 break;
             case Collectable.collectableNames.Grape:
                 playSound(clips[4]);
+                GameManager.instance.AddToSugarRush(-15);
                 //Sugar Rush Grape
                 break;
 
