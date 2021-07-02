@@ -14,7 +14,9 @@ public class GameManager : MonoBehaviour {
     public int difficulity = 1;
     public static GameManager instance;
     public TextMeshProUGUI scoreUi;
-    public GameObject player;//Player's Object
+    public GameObject player, gameOverUI;//Player's Object
+    public float sugarRushValue = 0;
+
     void Start() {
         instance = this;
     }
@@ -50,7 +52,17 @@ public class GameManager : MonoBehaviour {
         player.GetComponent<Rigidbody>().useGravity = false;
         player.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
         player.GetComponent<AudioSource>().PlayOneShot(player.GetComponent<PlayerController>().clips[2]);
+        gameOverUI.SetActive(true);
         //Score checking
         //Achievement checking
+    }
+
+    private void ManageSugarRush(int offSet) {
+        sugarRushValue += offSet;
+        if (sugarRushValue > 99) {
+            //Good
+        } else if (sugarRushValue < 1) {
+            //Bad
+        }
     }
 }
