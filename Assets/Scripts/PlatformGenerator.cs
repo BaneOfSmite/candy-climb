@@ -7,7 +7,7 @@ public class PlatformGenerator : MonoBehaviour {
     public Material[] colorRng;
     private int toSpawn = 20;
     private float spawnHeight = 0;
-    public float heightMultiplier = 3.85f;
+    public float heightMultiplier = 4f;
 
     private float scaleOffSet = 0.15f;
     private void Start() {
