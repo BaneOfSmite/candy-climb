@@ -533,7 +533,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Score: 0'
+  m_text: 'Score: 00000'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 79f668350698eef4cbf5b614b8356dfe, type: 2}
   m_sharedMaterial: {fileID: -1509323975794436213, guid: 79f668350698eef4cbf5b614b8356dfe, type: 2}
@@ -547,10 +547,10 @@ MonoBehaviour:
   m_enableVertexGradient: 1
   m_colorMode: 3
   m_fontColorGradient:
-    topLeft: {r: 1, g: 0.6, b: 0.7529412, a: 1}
-    topRight: {r: 1, g: 0.6, b: 0.7529412, a: 1}
-    bottomLeft: {r: 0.85800934, g: 0, b: 1, a: 1}
-    bottomRight: {r: 0.85882354, g: 0, b: 1, a: 1}
+    topLeft: {r: 0.66460484, g: 0.9716981, b: 0.6663314, a: 1}
+    topRight: {r: 0.6666667, g: 0.972549, b: 0.6666667, a: 1}
+    bottomLeft: {r: 0.251691, g: 0.5283019, b: 0.44986114, a: 1}
+    bottomRight: {r: 0.2509804, g: 0.5294118, b: 0.4509804, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -566,7 +566,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 8
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -695,7 +695,7 @@ MonoBehaviour:
   player: {fileID: 1136688484}
   gameOverUI: {fileID: 221315596}
   sugarRushBar: {fileID: 5779334561947629356}
-  sugarRushValue: 25
+  sugarRushValue: 50
 --- !u!4 &765675553
 Transform:
   m_ObjectHideFlags: 0
@@ -2711,7 +2711,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 670224309865224971, guid: 25d10f829df008b42bd5285b9040ff5d, type: 3}
+  - {fileID: 2100000, guid: 5d6f1ea62d7ff4c40aa1128cfe591111, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2753,9 +2753,9 @@ MonoBehaviour:
   colorRng:
   - {fileID: 2100000, guid: 1d3885fa92418b248b8237a3c930fbc3, type: 2}
   - {fileID: 2100000, guid: bbb724740a742c64d929354d27485af0, type: 2}
-  - {fileID: 2100000, guid: fd44d5fcded07fb4cb1a6c310ef01bc3, type: 2}
   - {fileID: 2100000, guid: c5fd688bb3fa26c4ca287df4d4e8c2e7, type: 2}
   heightMultiplier: 3.85
+  spawnOffSet: 0
 --- !u!4 &1948191307406632758
 Transform:
   m_ObjectHideFlags: 0
@@ -2807,9 +2807,9 @@ MonoBehaviour:
   colorRng:
   - {fileID: 2100000, guid: 1d3885fa92418b248b8237a3c930fbc3, type: 2}
   - {fileID: 2100000, guid: bbb724740a742c64d929354d27485af0, type: 2}
-  - {fileID: 2100000, guid: fd44d5fcded07fb4cb1a6c310ef01bc3, type: 2}
   - {fileID: 2100000, guid: c5fd688bb3fa26c4ca287df4d4e8c2e7, type: 2}
   heightMultiplier: 3.85
+  spawnOffSet: 0
 --- !u!4 &1948191307462573050
 Transform:
   m_ObjectHideFlags: 0
@@ -2878,9 +2878,9 @@ MonoBehaviour:
   colorRng:
   - {fileID: 2100000, guid: 1d3885fa92418b248b8237a3c930fbc3, type: 2}
   - {fileID: 2100000, guid: bbb724740a742c64d929354d27485af0, type: 2}
-  - {fileID: 2100000, guid: fd44d5fcded07fb4cb1a6c310ef01bc3, type: 2}
   - {fileID: 2100000, guid: c5fd688bb3fa26c4ca287df4d4e8c2e7, type: 2}
   heightMultiplier: 3.85
+  spawnOffSet: 0
 --- !u!4 &1948191307559992807
 Transform:
   m_ObjectHideFlags: 0
@@ -2915,9 +2915,9 @@ MonoBehaviour:
   colorRng:
   - {fileID: 2100000, guid: 1d3885fa92418b248b8237a3c930fbc3, type: 2}
   - {fileID: 2100000, guid: bbb724740a742c64d929354d27485af0, type: 2}
-  - {fileID: 2100000, guid: fd44d5fcded07fb4cb1a6c310ef01bc3, type: 2}
   - {fileID: 2100000, guid: c5fd688bb3fa26c4ca287df4d4e8c2e7, type: 2}
   heightMultiplier: 3.85
+  spawnOffSet: 0
 --- !u!4 &1948191307664280421
 Transform:
   m_ObjectHideFlags: 0
@@ -2969,9 +2969,9 @@ MonoBehaviour:
   colorRng:
   - {fileID: 2100000, guid: 1d3885fa92418b248b8237a3c930fbc3, type: 2}
   - {fileID: 2100000, guid: bbb724740a742c64d929354d27485af0, type: 2}
-  - {fileID: 2100000, guid: fd44d5fcded07fb4cb1a6c310ef01bc3, type: 2}
   - {fileID: 2100000, guid: c5fd688bb3fa26c4ca287df4d4e8c2e7, type: 2}
   heightMultiplier: 3.85
+  spawnOffSet: 0
 --- !u!4 &1948191307731270442
 Transform:
   m_ObjectHideFlags: 0
@@ -3023,9 +3023,9 @@ MonoBehaviour:
   colorRng:
   - {fileID: 2100000, guid: 1d3885fa92418b248b8237a3c930fbc3, type: 2}
   - {fileID: 2100000, guid: bbb724740a742c64d929354d27485af0, type: 2}
-  - {fileID: 2100000, guid: fd44d5fcded07fb4cb1a6c310ef01bc3, type: 2}
   - {fileID: 2100000, guid: c5fd688bb3fa26c4ca287df4d4e8c2e7, type: 2}
   heightMultiplier: 3.85
+  spawnOffSet: 0
 --- !u!4 &1948191307885691125
 Transform:
   m_ObjectHideFlags: 0
@@ -3077,9 +3077,9 @@ MonoBehaviour:
   colorRng:
   - {fileID: 2100000, guid: 1d3885fa92418b248b8237a3c930fbc3, type: 2}
   - {fileID: 2100000, guid: bbb724740a742c64d929354d27485af0, type: 2}
-  - {fileID: 2100000, guid: fd44d5fcded07fb4cb1a6c310ef01bc3, type: 2}
   - {fileID: 2100000, guid: c5fd688bb3fa26c4ca287df4d4e8c2e7, type: 2}
   heightMultiplier: 3.85
+  spawnOffSet: 0
 --- !u!4 &1948191308259094118
 Transform:
   m_ObjectHideFlags: 0
@@ -3131,9 +3131,9 @@ MonoBehaviour:
   colorRng:
   - {fileID: 2100000, guid: 1d3885fa92418b248b8237a3c930fbc3, type: 2}
   - {fileID: 2100000, guid: bbb724740a742c64d929354d27485af0, type: 2}
-  - {fileID: 2100000, guid: fd44d5fcded07fb4cb1a6c310ef01bc3, type: 2}
   - {fileID: 2100000, guid: c5fd688bb3fa26c4ca287df4d4e8c2e7, type: 2}
   heightMultiplier: 3.85
+  spawnOffSet: 0
 --- !u!4 &1948191308322124742
 Transform:
   m_ObjectHideFlags: 0
@@ -3202,9 +3202,9 @@ MonoBehaviour:
   colorRng:
   - {fileID: 2100000, guid: 1d3885fa92418b248b8237a3c930fbc3, type: 2}
   - {fileID: 2100000, guid: bbb724740a742c64d929354d27485af0, type: 2}
-  - {fileID: 2100000, guid: fd44d5fcded07fb4cb1a6c310ef01bc3, type: 2}
   - {fileID: 2100000, guid: c5fd688bb3fa26c4ca287df4d4e8c2e7, type: 2}
   heightMultiplier: 3.85
+  spawnOffSet: 0
 --- !u!4 &1948191308339545343
 Transform:
   m_ObjectHideFlags: 0
@@ -3270,9 +3270,9 @@ MonoBehaviour:
   colorRng:
   - {fileID: 2100000, guid: 1d3885fa92418b248b8237a3c930fbc3, type: 2}
   - {fileID: 2100000, guid: bbb724740a742c64d929354d27485af0, type: 2}
-  - {fileID: 2100000, guid: fd44d5fcded07fb4cb1a6c310ef01bc3, type: 2}
   - {fileID: 2100000, guid: c5fd688bb3fa26c4ca287df4d4e8c2e7, type: 2}
   heightMultiplier: 3.85
+  spawnOffSet: 0
 --- !u!4 &1948191308843799812
 Transform:
   m_ObjectHideFlags: 0
@@ -3324,9 +3324,9 @@ MonoBehaviour:
   colorRng:
   - {fileID: 2100000, guid: 1d3885fa92418b248b8237a3c930fbc3, type: 2}
   - {fileID: 2100000, guid: bbb724740a742c64d929354d27485af0, type: 2}
-  - {fileID: 2100000, guid: fd44d5fcded07fb4cb1a6c310ef01bc3, type: 2}
   - {fileID: 2100000, guid: c5fd688bb3fa26c4ca287df4d4e8c2e7, type: 2}
   heightMultiplier: 3.85
+  spawnOffSet: 0
 --- !u!114 &2908816341916311758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3497,7 +3497,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.25
+  m_FillAmount: 0.5
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -3610,7 +3610,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 25
+  m_Value: 50
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3672,9 +3672,9 @@ MonoBehaviour:
   colorRng:
   - {fileID: 2100000, guid: 1d3885fa92418b248b8237a3c930fbc3, type: 2}
   - {fileID: 2100000, guid: bbb724740a742c64d929354d27485af0, type: 2}
-  - {fileID: 2100000, guid: fd44d5fcded07fb4cb1a6c310ef01bc3, type: 2}
   - {fileID: 2100000, guid: c5fd688bb3fa26c4ca287df4d4e8c2e7, type: 2}
   heightMultiplier: 3.85
+  spawnOffSet: 0
 --- !u!4 &9096014098353143842
 Transform:
   m_ObjectHideFlags: 0

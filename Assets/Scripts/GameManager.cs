@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour {
     private sugarRushStatus rushStatus = sugarRushStatus.Charging;
     public gameStates gameState = gameStates.Idle;
 
-    public int score;
+    public float score;
     public int difficulity = 1;
     public static GameManager instance;
     public TextMeshProUGUI scoreUi;
@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        scoreUi.text = "Score: " + score;
+        updateScore();
 
         //Difficulity Scaling based on score/current height\\
         if (score > 100) {
@@ -55,6 +55,21 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    private void updateScore() {
+        string postFix = "";
+        string _score = score.ToString();
+        if (score > 1000f) {
+
+            if ((score / 1000f) > 0 && (score / 1000f) < 999f) {
+                _score = (score/1000f).ToString("F1");
+                postFix = "K";
+            } else if ((score / 1000000f) > 0) {
+                _score = (score/1000000f).ToString("F2");
+                postFix = "M";
+            }
+        }
+        scoreUi.text = "Score: " + _score + postFix;
+    }
     private void GameOver() {
         player.GetComponent<Rigidbody>().useGravity = false;
         player.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
@@ -95,7 +110,7 @@ public class GameManager : MonoBehaviour {
 
         } else {
             GameObject.FindGameObjectWithTag("MovementController").GetComponent<MovementController>().isInvert = 1;
-            volume.profile.GetSetting<ColorGrading>().colorFilter.value = new Color(124f/255f, 200f/255f, 124f/255f);
+            volume.profile.GetSetting<ColorGrading>().colorFilter.value = new Color(124f / 255f, 200f / 255f, 124f / 255f);
             while (sugarRushValue <= 50) {
                 yield return new WaitForSeconds(0.2f);
                 sugarRushValue++;
