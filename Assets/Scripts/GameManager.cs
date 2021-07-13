@@ -1,18 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
+using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
     public PostProcessVolume volume;
     public enum gameStates {
-        Idle, inGame, GameOver
-    };
+        Idle,
+        inGame,
+        GameOver
+    }
     private enum sugarRushStatus {
-        Charging, Good, Bad
-    };
+        Charging,
+        Good,
+        Bad
+    }
 
     private sugarRushStatus rushStatus = sugarRushStatus.Charging;
     public gameStates gameState = gameStates.Idle;
@@ -21,8 +25,9 @@ public class GameManager : MonoBehaviour {
     public int difficulity = 1;
     public static GameManager instance;
     public TextMeshProUGUI scoreUi;
-    public GameObject player, gameOverUI, sugarRushBar;//Player's Object
+    public GameObject player, gameOverUI, sugarRushBar; //Player's Object
     public float sugarRushValue = 50;
+    public ParticleSystem[] _particleSystems;
 
     void Start() {
         instance = this;
@@ -61,10 +66,10 @@ public class GameManager : MonoBehaviour {
         if (score > 1000f) {
 
             if ((score / 1000f) > 0 && (score / 1000f) < 999f) {
-                _score = (score/1000f).ToString("F1");
+                _score = (score / 1000f).ToString("F1");
                 postFix = "K";
             } else if ((score / 1000000f) > 0) {
-                _score = (score/1000000f).ToString("F2");
+                _score = (score / 1000000f).ToString("F2");
                 postFix = "M";
             }
         }
@@ -97,6 +102,7 @@ public class GameManager : MonoBehaviour {
 
     private IEnumerator SugarRushEffect() {
         if (rushStatus == sugarRushStatus.Good) {
+            //_particleSystems[0].Stop();
             float currentJumpHeight = player.GetComponent<PlayerController>().jumpHeight;
             player.GetComponent<PlayerController>().jumpHeight = 7.5f;
             volume.profile.GetSetting<ChromaticAberration>().intensity.value = 1;
@@ -107,8 +113,10 @@ public class GameManager : MonoBehaviour {
             }
             volume.profile.GetSetting<ChromaticAberration>().intensity.value = 0;
             player.GetComponent<PlayerController>().jumpHeight = currentJumpHeight;
+            //_particleSystems[0].Stop();
 
-        } else {
+        } else { //Bad
+            _particleSystems[1].Play();
             GameObject.FindGameObjectWithTag("MovementController").GetComponent<MovementController>().isInvert = 1;
             volume.profile.GetSetting<ColorGrading>().colorFilter.value = new Color(124f / 255f, 200f / 255f, 124f / 255f);
             while (sugarRushValue <= 50) {
@@ -118,6 +126,7 @@ public class GameManager : MonoBehaviour {
             }
             GameObject.FindGameObjectWithTag("MovementController").GetComponent<MovementController>().isInvert = -1;
             volume.profile.GetSetting<ColorGrading>().colorFilter.value = new Color(1, 1, 1);
+            _particleSystems[1].Stop();
         }
         rushStatus = sugarRushStatus.Charging;
     }
