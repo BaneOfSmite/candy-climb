@@ -9,6 +9,7 @@ public class MenuManager : MonoBehaviour {
         switch (id) {
             //1-3 GameOver Buttons
             case 1: //Replay
+                AchievementManager.instance.SaveData();
                 SceneManager.LoadScene(1);
                 break;
             case 2: //Achievements

@@ -22,8 +22,12 @@ public class PlayerController : MonoBehaviour {
 
         if (Input.GetAxis("Horizontal") > 0 || Input.acceleration.x > 0.1) {
             GetComponent<SpriteRenderer>().flipX = false;
+            transform.GetChild(1).localPosition = new Vector3(0.1f, -0.07f, 0);
+            transform.GetChild(1).localEulerAngles = new Vector3(0,0,0);
         } else if (Input.GetAxis("Horizontal") < 0 || Input.acceleration.x < -0.1) {
             GetComponent<SpriteRenderer>().flipX = true;
+             transform.GetChild(1).localPosition = new Vector3(-0.1f, -0.07f, 0);
+             transform.GetChild(1).localEulerAngles = new Vector3(0,180,0);
         }
     }
 

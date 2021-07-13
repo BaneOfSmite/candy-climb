@@ -668,6 +668,7 @@ GameObject:
   m_Component:
   - component: {fileID: 765675553}
   - component: {fileID: 765675552}
+  - component: {fileID: 765675554}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -692,10 +693,13 @@ MonoBehaviour:
   score: 0
   difficulity: 1
   scoreUi: {fileID: 553501548}
+  gameOverCurrent: {fileID: 1025520320}
+  gameOverBest: {fileID: 788503764}
   player: {fileID: 1136688484}
   gameOverUI: {fileID: 221315596}
   sugarRushBar: {fileID: 5779334561947629356}
-  sugarRushValue: 10
+  newBestScoreUI: {fileID: 1672656977}
+  sugarRushValue: 50
   _particleSystems:
   - {fileID: 0}
   - {fileID: 1267304584}
@@ -713,6 +717,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &765675554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765675551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb2772327652b6c44aa41001cf1adb81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMainMenu: 0
 --- !u!1 &788503762
 GameObject:
   m_ObjectHideFlags: 0
@@ -1471,7 +1488,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1136688484}
   m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 2.327, y: 0.259, z: 2.371}
+  m_LocalPosition: {x: 2.327, y: 0.231, z: 2.371}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1312368036}
@@ -1510,7 +1527,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.15, y: 0.02, z: 0.1}
-  m_Center: {x: 0.005, y: -0.3, z: 0.05}
+  m_Center: {x: 0.005, y: -0.275, z: 0.05}
 --- !u!82 &1136688491
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1659,7 +1676,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bbb724740a742c64d929354d27485af0, type: 2}
+  - {fileID: 2100000, guid: b6b8ad292626c9740b4646b7fb023e9e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1778,7 +1795,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -1841,7 +1858,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -2340,7 +2357,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 90, z: 0}
-    m_Scale: {x: 0.5, y: 0.5, z: 0.5}
+    m_Scale: {x: 0.1, y: 0.1, z: 0.1}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -2538,7 +2555,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 100
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -7018,7 +7035,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1672656978
 RectTransform:
   m_ObjectHideFlags: 0

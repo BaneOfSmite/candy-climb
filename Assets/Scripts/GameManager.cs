@@ -24,8 +24,8 @@ public class GameManager : MonoBehaviour {
     public float score;
     public int difficulity = 1;
     public static GameManager instance;
-    public TextMeshProUGUI scoreUi;
-    public GameObject player, gameOverUI, sugarRushBar; //Player's Object
+    public TextMeshProUGUI scoreUi, gameOverCurrent, gameOverBest;
+    public GameObject player, gameOverUI, sugarRushBar, newBestScoreUI; //Player's Object
     public float sugarRushValue = 50;
     public ParticleSystem[] _particleSystems;
 
@@ -61,21 +61,18 @@ public class GameManager : MonoBehaviour {
     }
 
     private void updateScore() {
-        string postFix = "";
-        string _score = score.ToString();
-        if (score > 1000f) {
-
-            if ((score / 1000f) > 0 && (score / 1000f) < 999f) {
-                _score = (score / 1000f).ToString("F1");
-                postFix = "K";
-            } else if ((score / 1000000f) > 0) {
-                _score = (score / 1000000f).ToString("F2");
-                postFix = "M";
-            }
-        }
-        scoreUi.text = "Score: " + _score + postFix;
+        scoreUi.text = "Score: " + scoreFormatter(score);
+        gameOverCurrent.text = "Current Score: " + scoreFormatter(score);
     }
     private void GameOver() {
+        if (score > AchievementManager.instance.toSave.getScore()) {
+            gameOverBest.text = "Best Score: " + scoreFormatter(score);
+            newBestScoreUI.SetActive(true);
+            AchievementManager.instance.toSave.setScore(score);
+        } else {
+            gameOverBest.text = "Best Score: " + scoreFormatter(AchievementManager.instance.toSave.getScore());
+        }
+
         player.GetComponent<Rigidbody>().useGravity = false;
         player.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
         player.GetComponent<AudioSource>().PlayOneShot(player.GetComponent<PlayerController>().clips[2]);
@@ -83,7 +80,6 @@ public class GameManager : MonoBehaviour {
         //Score checking
         //Achievement checking
     }
-
     public void AddToSugarRush(float increment) {
         if (rushStatus == sugarRushStatus.Charging) {
             sugarRushValue += increment;
@@ -99,7 +95,6 @@ public class GameManager : MonoBehaviour {
             }
         }
     }
-
     private IEnumerator SugarRushEffect() {
         if (rushStatus == sugarRushStatus.Good) {
             //_particleSystems[0].Stop();
@@ -129,6 +124,22 @@ public class GameManager : MonoBehaviour {
             _particleSystems[1].Stop();
         }
         rushStatus = sugarRushStatus.Charging;
+    }
+    public string scoreFormatter(float _score) {
+        string postFix = "";
+        if (score > 1000f) {
+
+            if ((_score / 1000f) > 0 && (_score / 1000f) < 999f) {
+                postFix = (_score / 1000f).ToString("F1");
+                postFix += "K";
+            } else if ((_score / 1000000f) > 0) {
+                postFix = (_score / 1000000f).ToString("F2");
+                postFix += "M";
+            }
+        } else {
+            postFix = _score.ToString();
+        }
+        return postFix;
     }
 
 }
