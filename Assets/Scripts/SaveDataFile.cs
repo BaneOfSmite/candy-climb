@@ -7,6 +7,9 @@
     public int totalCollected;
     public int enemiesKilled;
 
+    public int music;
+    public int effect;
+
     //Set Functions
     public void setScore(float _score) {
         this.score = _score;
@@ -18,14 +21,20 @@
         this.sugarRush = _sugarRush;
     }
 
-    public void sethealthyVomit(int _healthyVomit) {
+    public void setHealthyVomit(int _healthyVomit) {
         this.healthyVomit = _healthyVomit;
     }
-    public void settotalCollected(int _totalCollected) {
+    public void setTotalCollected(int _totalCollected) {
         this.totalCollected = _totalCollected;
     }
-    public void setenemiesKilled(int _enemiesKilled) {
+    public void setEnemiesKilled(int _enemiesKilled) {
         this.enemiesKilled = _enemiesKilled;
+    }
+    public void setMusic(int _music) {
+        this.music = _music;
+    }
+    public void setEffect(int _effect) {
+        this.effect = _effect;
     }
 
     //Get Functions
@@ -39,13 +48,19 @@
         return this.sugarRush;
     }
 
-    public int gethealthyVomit() {
+    public int getHealthyVomit() {
         return this.healthyVomit;
     }
-    public int gettotalCollected() {
+    public int getTotalCollected() {
         return this.totalCollected;
     }
-    public int getenemiesKilled() {
+    public int getEnemiesKilled() {
         return this.enemiesKilled;
+    }
+    public int getMusic() {
+        return this.music;
+    }
+    public int getEffect() {
+        return this.effect;
     }
 }

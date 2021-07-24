@@ -24,9 +24,9 @@ public class AchievementManager : MonoBehaviour {
         } else {
             toSave.setScore(0);
             toSave.setSugarRush(0);
-            toSave.settotalCollected(0);
-            toSave.sethealthyVomit(0);
-            toSave.setenemiesKilled(0);
+            toSave.setTotalCollected(0);
+            toSave.setHealthyVomit(0);
+            toSave.setEnemiesKilled(0);
             //toSave.setAchievements
         }
     }
