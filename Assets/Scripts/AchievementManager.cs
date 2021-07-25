@@ -27,6 +27,8 @@ public class AchievementManager : MonoBehaviour {
             toSave.setTotalCollected(0);
             toSave.setHealthyVomit(0);
             toSave.setEnemiesKilled(0);
+            toSave.setMusic(100);
+            toSave.setEffect(100);
             //toSave.setAchievements
         }
     }
