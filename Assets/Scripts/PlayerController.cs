@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour {
 
     public AudioClip[] clips;
     public static PlayerController instance;
+    public bool[] collectWithoutDupe = new bool[6];
 
     void Start() {
         instance = this;
@@ -23,11 +24,11 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetAxis("Horizontal") > 0 || Input.acceleration.x > 0.1) {
             GetComponent<SpriteRenderer>().flipX = false;
             transform.GetChild(1).localPosition = new Vector3(0.1f, -0.07f, 0);
-            transform.GetChild(1).localEulerAngles = new Vector3(0,0,0);
+            transform.GetChild(1).localEulerAngles = new Vector3(0, 0, 0);
         } else if (Input.GetAxis("Horizontal") < 0 || Input.acceleration.x < -0.1) {
             GetComponent<SpriteRenderer>().flipX = true;
-             transform.GetChild(1).localPosition = new Vector3(-0.1f, -0.07f, 0);
-             transform.GetChild(1).localEulerAngles = new Vector3(0,180,0);
+            transform.GetChild(1).localPosition = new Vector3(-0.1f, -0.07f, 0);
+            transform.GetChild(1).localEulerAngles = new Vector3(0, 180, 0);
         }
     }
 
@@ -52,8 +53,26 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void collectedCollectable(GameObject _collectable) {
-        switch (_collectable.GetComponent<Collectable>().currentType) {
+        AchievementManager.instance.toSave.setTotalCollected(AchievementManager.instance.toSave.getTotalCollected() + 1);
+        if (AchievementManager.instance.toSave.getAchievements()[4] < 1) {
+            if (!collectWithoutDupe[(int)_collectable.GetComponent<Collectable>().currentType]) {
+                collectWithoutDupe[(int)_collectable.GetComponent<Collectable>().currentType] = true;
+                bool achieved = true;
+                for (int i = 0; i < collectWithoutDupe.Length; i++) {
+                    if (!collectWithoutDupe[i]) {
+                        achieved = false;
+                    }
+                }
+                if (achieved) {
 
+                    AchievementManager.instance.toSave.getAchievements()[4] = 1;
+
+                }
+            } else {
+                collectWithoutDupe = new bool[6];
+            }
+        }
+        switch (_collectable.GetComponent<Collectable>().currentType) {
             //Good Collectables\\
             case Collectable.collectableNames.Cheesecake:
                 playSound(clips[3]);

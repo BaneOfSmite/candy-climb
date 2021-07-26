@@ -11,10 +11,15 @@ public class MenuManager : MonoBehaviour {
     private AchievementManager _am;
     public TextMeshProUGUI musicValue, effectValue;
     public AudioMixer volumeController;
+    public GameObject optionMenu, achievementMenu, deathScreen;
+    public bool isMainMenu = true;
 
     void Start() {
-        _am = GetComponent<AchievementManager>();
-
+        if (isMainMenu) {
+            _am = GetComponent<AchievementManager>();
+        } else {
+            _am = AchievementManager.instance;
+        }
         musicSlider.value = _am.toSave.getMusic();
         int toDisplay = Mathf.RoundToInt(((musicSlider.value + 80) / 80) * 100);
         musicValue.text = toDisplay.ToString();
@@ -27,29 +32,45 @@ public class MenuManager : MonoBehaviour {
 
     public void inGameButton(int id) {
         switch (id) {
-            //1-3 GameOver Buttons\\
+            //1-4 GameOver Buttons\\
             case 1: //Replay
                 AchievementManager.instance.SaveData();
                 SceneManager.LoadScene(1);
                 break;
             case 2: //Achievements
-
+                deathScreen.SetActive(false);
+                achievementMenu.SetActive(true);
                 break;
             case 3: //Home
                 AchievementManager.instance.SaveData();
                 SceneManager.LoadScene(0);
                 break;
-            case 4:
+            case 4: //Return To Death Menu
+                deathScreen.SetActive(true);
+                achievementMenu.SetActive(false);
                 break;
 
-            //5-7 Main Menu's Button Controller\\
+            //5-8 Main Menu's Button Controller\\
             case 5: //Play
                 _am.SaveData();
                 SceneManager.LoadSceneAsync(1);
                 break;
             case 6: //Options
+                optionMenu.SetActive(true);
+                achievementMenu.SetActive(false);
+                GetComponent<Animator>().SetBool("Open", true);
                 break;
             case 7: //Achievements
+                optionMenu.SetActive(false);
+                achievementMenu.SetActive(true);
+                GetComponent<Animator>().SetBool("Open", true);
+                break;
+            case 8: //Return to base Menu
+                GetComponent<Animator>().SetBool("Open", false);
+                break;
+            //The rest is finished later, forgotten 😅\\
+            case 9: //In-game options button
+                
                 break;
         }
     }

@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour {
         gameOverCurrent.text = "Current Score: " + scoreFormatter(score);
     }
     private void GameOver() {
+        detectAchievement();
         if (score > AchievementManager.instance.toSave.getScore()) {
             gameOverBest.text = "Best Score: " + scoreFormatter(score);
             newBestScoreUI.SetActive(true);
@@ -77,8 +78,7 @@ public class GameManager : MonoBehaviour {
         player.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
         player.GetComponent<AudioSource>().PlayOneShot(player.GetComponent<PlayerController>().clips[2]);
         gameOverUI.SetActive(true);
-        //Score checking
-        //Achievement checking
+        AchievementManager.instance.SaveData();
     }
     public void AddToSugarRush(float increment) {
         if (rushStatus == sugarRushStatus.Charging) {
@@ -97,6 +97,7 @@ public class GameManager : MonoBehaviour {
     }
     private IEnumerator SugarRushEffect() {
         if (rushStatus == sugarRushStatus.Good) {
+            AchievementManager.instance.toSave.setSugarRush(AchievementManager.instance.toSave.getSugarRush() + 1);
             //_particleSystems[0].Stop();
             float currentJumpHeight = player.GetComponent<PlayerController>().jumpHeight;
             player.GetComponent<PlayerController>().jumpHeight = 7.5f;
@@ -111,6 +112,7 @@ public class GameManager : MonoBehaviour {
             //_particleSystems[0].Stop();
 
         } else { //Bad
+            AchievementManager.instance.toSave.setHealthyVomit(AchievementManager.instance.toSave.getHealthyVomit() + 1);
             _particleSystems[1].Play();
             GameObject.FindGameObjectWithTag("MovementController").GetComponent<MovementController>().isInvert = 1;
             volume.profile.GetSetting<ColorGrading>().colorFilter.value = new Color(124f / 255f, 200f / 255f, 124f / 255f);
@@ -142,4 +144,132 @@ public class GameManager : MonoBehaviour {
         return postFix;
     }
 
+    private void detectAchievement() {
+        //Reach Height Of X\\
+        if (score > 1000000) {
+            if (AchievementManager.instance.toSave.getAchievements()[0] != 7) {
+                AchievementManager.instance.toSave.getAchievements()[0] = 7;
+            }
+        } else if (score > 100000) {
+            if (AchievementManager.instance.toSave.getAchievements()[0] < 6) {
+                AchievementManager.instance.toSave.getAchievements()[0] = 6;
+            }
+        } else if (score > 10000) {
+            if (AchievementManager.instance.toSave.getAchievements()[0] < 5) {
+                AchievementManager.instance.toSave.getAchievements()[0] = 5;
+            }
+        } else if (score > 1000) {
+            if (AchievementManager.instance.toSave.getAchievements()[0] < 4) {
+                AchievementManager.instance.toSave.getAchievements()[0] = 4;
+            }
+        } else if (score > 500) {
+            if (AchievementManager.instance.toSave.getAchievements()[0] < 3) {
+                AchievementManager.instance.toSave.getAchievements()[0] = 3;
+            }
+        } else if (score > 100) {
+            if (AchievementManager.instance.toSave.getAchievements()[0] < 2) {
+                AchievementManager.instance.toSave.getAchievements()[0] = 2;
+            }
+        } else if (score > 50) {
+            if (AchievementManager.instance.toSave.getAchievements()[0] < 1) {
+                AchievementManager.instance.toSave.getAchievements()[0] = 1;
+            }
+        }
+        //Sugar Rush X Times\\
+        if (AchievementManager.instance.toSave.getSugarRush() > 100) {
+            if (AchievementManager.instance.toSave.getAchievements()[1] != 6) {
+                AchievementManager.instance.toSave.getAchievements()[1] = 6;
+            }
+        } else if (AchievementManager.instance.toSave.getSugarRush() > 50) {
+            if (AchievementManager.instance.toSave.getAchievements()[1] < 5) {
+                AchievementManager.instance.toSave.getAchievements()[1] = 5;
+            }
+        } else if (AchievementManager.instance.toSave.getSugarRush() > 25) {
+            if (AchievementManager.instance.toSave.getAchievements()[1] < 4) {
+                AchievementManager.instance.toSave.getAchievements()[1] = 4;
+            }
+        } else if (AchievementManager.instance.toSave.getSugarRush() > 10) {
+            if (AchievementManager.instance.toSave.getAchievements()[1] < 3) {
+                AchievementManager.instance.toSave.getAchievements()[1] = 3;
+            }
+        } else if (AchievementManager.instance.toSave.getSugarRush() > 5) {
+            if (AchievementManager.instance.toSave.getAchievements()[1] < 2) {
+                AchievementManager.instance.toSave.getAchievements()[1] = 2;
+            }
+        } else if (AchievementManager.instance.toSave.getSugarRush() > 1) {
+            if (AchievementManager.instance.toSave.getAchievements()[1] < 1) {
+                AchievementManager.instance.toSave.getAchievements()[1] = 1;
+            }
+        }
+        //Collected Collectable X Times\\
+        if (AchievementManager.instance.toSave.getTotalCollected() > 500) {
+            if (AchievementManager.instance.toSave.getAchievements()[2] != 5) {
+                AchievementManager.instance.toSave.getAchievements()[2] = 5;
+            }
+        } else if (AchievementManager.instance.toSave.getTotalCollected() > 100) {
+            if (AchievementManager.instance.toSave.getAchievements()[2] < 4) {
+                AchievementManager.instance.toSave.getAchievements()[2] = 4;
+            }
+        } else if (AchievementManager.instance.toSave.getTotalCollected() > 50) {
+            if (AchievementManager.instance.toSave.getAchievements()[2] < 3) {
+                AchievementManager.instance.toSave.getAchievements()[2] = 3;
+            }
+        } else if (AchievementManager.instance.toSave.getTotalCollected() > 25) {
+            if (AchievementManager.instance.toSave.getAchievements()[2] < 2) {
+                AchievementManager.instance.toSave.getAchievements()[2] = 2;
+            }
+        } else if (AchievementManager.instance.toSave.getTotalCollected() > 10) {
+            if (AchievementManager.instance.toSave.getAchievements()[2] < 1) {
+                AchievementManager.instance.toSave.getAchievements()[2] = 1;
+            }
+        }
+        //Vomit X Times\\
+        if (AchievementManager.instance.toSave.getHealthyVomit() > 100) {
+            if (AchievementManager.instance.toSave.getAchievements()[3] != 6) {
+                AchievementManager.instance.toSave.getAchievements()[3] = 6;
+            }
+        } else if (AchievementManager.instance.toSave.getHealthyVomit() > 50) {
+            if (AchievementManager.instance.toSave.getAchievements()[3] < 5) {
+                AchievementManager.instance.toSave.getAchievements()[3] = 5;
+            }
+        } else if (AchievementManager.instance.toSave.getHealthyVomit() > 25) {
+            if (AchievementManager.instance.toSave.getAchievements()[3] < 4) {
+                AchievementManager.instance.toSave.getAchievements()[3] = 4;
+            }
+        } else if (AchievementManager.instance.toSave.getHealthyVomit() > 10) {
+            if (AchievementManager.instance.toSave.getAchievements()[3] < 3) {
+                AchievementManager.instance.toSave.getAchievements()[3] = 3;
+            }
+        } else if (AchievementManager.instance.toSave.getHealthyVomit() > 5) {
+            if (AchievementManager.instance.toSave.getAchievements()[3] < 2) {
+                AchievementManager.instance.toSave.getAchievements()[3] = 2;
+            }
+        } else if (AchievementManager.instance.toSave.getHealthyVomit() > 1) {
+            if (AchievementManager.instance.toSave.getAchievements()[3] < 1) {
+                AchievementManager.instance.toSave.getAchievements()[3] = 1;
+            }
+        }
+        //Killed X Fruit Guards\\
+        if (AchievementManager.instance.toSave.getEnemiesKilled() > 50) {
+            if (AchievementManager.instance.toSave.getAchievements()[4] != 5) {
+                AchievementManager.instance.toSave.getAchievements()[4] = 5;
+            }
+        } else if (AchievementManager.instance.toSave.getEnemiesKilled() > 25) {
+            if (AchievementManager.instance.toSave.getAchievements()[4] < 4) {
+                AchievementManager.instance.toSave.getAchievements()[4] = 4;
+            }
+        } else if (AchievementManager.instance.toSave.getEnemiesKilled() > 15) {
+            if (AchievementManager.instance.toSave.getAchievements()[4] < 3) {
+                AchievementManager.instance.toSave.getAchievements()[4] = 3;
+            }
+        } else if (AchievementManager.instance.toSave.getEnemiesKilled() > 10) {
+            if (AchievementManager.instance.toSave.getAchievements()[4] < 2) {
+                AchievementManager.instance.toSave.getAchievements()[4] = 2;
+            }
+        } else if (AchievementManager.instance.toSave.getEnemiesKilled() > 5) {
+            if (AchievementManager.instance.toSave.getAchievements()[4] < 1) {
+                AchievementManager.instance.toSave.getAchievements()[4] = 1;
+            }
+        }
+    }
 }
