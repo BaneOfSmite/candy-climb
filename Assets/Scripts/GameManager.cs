@@ -12,13 +12,13 @@ public class GameManager : MonoBehaviour {
         inGame,
         GameOver
     }
-    private enum sugarRushStatus {
+    public enum sugarRushStatus {
         Charging,
         Good,
         Bad
     }
 
-    private sugarRushStatus rushStatus = sugarRushStatus.Charging;
+    public sugarRushStatus rushStatus = sugarRushStatus.Charging;
     public gameStates gameState = gameStates.Idle;
 
     public float score;
@@ -55,7 +55,6 @@ public class GameManager : MonoBehaviour {
             player.GetComponent<Rigidbody>().AddForce(new Vector3(0, 1, 0) * 5f, ForceMode.Impulse);
 
         } else if (gameState == gameStates.inGame && (Camera.main.transform.position.y - player.transform.position.y) > 2) {
-            gameState = gameStates.GameOver;
             GameOver();
         }
     }
@@ -64,7 +63,8 @@ public class GameManager : MonoBehaviour {
         scoreUi.text = "Score: " + scoreFormatter(score);
         gameOverCurrent.text = "Current Score: " + scoreFormatter(score);
     }
-    private void GameOver() {
+    public void GameOver() {
+        gameState = gameStates.GameOver;
         detectAchievement();
         if (score > AchievementManager.instance.toSave.getScore()) {
             gameOverBest.text = "Best Score: " + scoreFormatter(score);
@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour {
             player.GetComponent<PlayerController>().jumpHeight = 7.5f;
             volume.profile.GetSetting<ChromaticAberration>().intensity.value = 1;
             while (sugarRushValue >= 25) {
-                yield return new WaitForSeconds(0.2f);
+                yield return new WaitForSecondsRealtime(0.2f);
                 sugarRushValue--;
                 sugarRushBar.GetComponent<Slider>().value = Mathf.Clamp(sugarRushValue, 0, 100);
             }
@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour {
             GameObject.FindGameObjectWithTag("MovementController").GetComponent<MovementController>().isInvert = 1;
             volume.profile.GetSetting<ColorGrading>().colorFilter.value = new Color(124f / 255f, 200f / 255f, 124f / 255f);
             while (sugarRushValue <= 50) {
-                yield return new WaitForSeconds(0.2f);
+                yield return new WaitForSecondsRealtime(0.2f);
                 sugarRushValue++;
                 sugarRushBar.GetComponent<Slider>().value = Mathf.Clamp(sugarRushValue, 0, 100);
             }

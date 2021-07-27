@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour {
     public AudioClip[] clips;
     public static PlayerController instance;
     public bool[] collectWithoutDupe = new bool[6];
+    public PowerUpManager _pum;
+    public ParticleSystem deathParticle;
 
     void Start() {
         instance = this;
@@ -44,6 +46,10 @@ public class PlayerController : MonoBehaviour {
                 }
 
                 GetComponent<Rigidbody>().velocity = new Vector3(0, 1 * jumpHeight, 0);
+            } else if (other.gameObject.CompareTag("Enemy")) {
+                GetComponent<BoxCollider>().enabled = false;
+                transform.GetChild(0).GetComponent<CapsuleCollider>().enabled = false;
+                StartCoroutine("touchEnemy");
             }
         }
     }
@@ -53,6 +59,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void collectedCollectable(GameObject _collectable) {
+        _pum.addEffect((int)_collectable.GetComponent<Collectable>().currentType);
         AchievementManager.instance.toSave.setTotalCollected(AchievementManager.instance.toSave.getTotalCollected() + 1);
         if (AchievementManager.instance.toSave.getAchievements()[4] < 1) {
             if (!collectWithoutDupe[(int)_collectable.GetComponent<Collectable>().currentType]) {
@@ -110,6 +117,18 @@ public class PlayerController : MonoBehaviour {
         }
         //Spawn Collect Particle
         Destroy(_collectable);
+    }
+
+    private IEnumerator touchEnemy() {
+        deathParticle.Play();
+        for (int i = 0; i < _pum.timeLeft.Length; i++) {
+            _pum.removeEffect(i);
+        }
+        GetComponent<Rigidbody>().useGravity = false;
+        GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+        yield return new WaitForSecondsRealtime(1);
+        GameManager.instance.GameOver();
+        GetComponent<Rigidbody>().useGravity = true;
     }
 }
 
