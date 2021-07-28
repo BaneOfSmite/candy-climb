@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour {
     public GameObject player, gameOverUI, sugarRushBar, newBestScoreUI; //Player's Object
     public float sugarRushValue = 50;
     public ParticleSystem[] _particleSystems;
+    public GameObject bullet, rotationMovement;
 
     void Start() {
         instance = this;
@@ -36,6 +37,15 @@ public class GameManager : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         updateScore();
+        if (Input.GetMouseButtonDown(0)) {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit, 100.0f, LayerMask.GetMask("Enemy"))) {
+                GameObject _bullet = Instantiate(bullet, player.transform.position, Quaternion.identity);
+                _bullet.GetComponent<Bullet>().target = hit.transform.gameObject;
+                _bullet.transform.SetParent(rotationMovement.transform);
+            }
+        }
 
         //Difficulity Scaling based on score/current height\\
         if (score > 100) {

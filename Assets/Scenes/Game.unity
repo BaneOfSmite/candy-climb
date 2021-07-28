@@ -2039,6 +2039,8 @@ MonoBehaviour:
   _particleSystems:
   - {fileID: 0}
   - {fileID: 1267304584}
+  bullet: {fileID: 4393790486069137170, guid: a7ec6d981198a99478407cc7d518927b, type: 3}
+  rotationMovement: {fileID: 919562911}
 --- !u!4 &765675553
 Transform:
   m_ObjectHideFlags: 0
