@@ -106,6 +106,9 @@ public class GameManager : MonoBehaviour {
         }
     }
     private IEnumerator SugarRushEffect() {
+        foreach (GameObject e in GameObject.FindGameObjectsWithTag("Enemy")) {
+            Destroy(e);
+        }
         if (rushStatus == sugarRushStatus.Good) {
             AchievementManager.instance.toSave.setSugarRush(AchievementManager.instance.toSave.getSugarRush() + 1);
             //_particleSystems[0].Stop();

@@ -26,7 +26,7 @@ public class Platform : MonoBehaviour {
                     }
                 }
                 spawned.transform.SetParent(transform);
-            } else {
+            } else if (GameManager.instance.rushStatus == GameManager.sugarRushStatus.Charging) {
                 spawnLoc = transform.position + new Vector3(0, 0.2f, 0);
                 GameObject enemy = Instantiate(enemies[Random.Range(0, enemies.Length)], spawnLoc, Quaternion.identity);
                 enemy.transform.LookAt(new Vector3(0, transform.position.y, 0));
@@ -39,7 +39,7 @@ public class Platform : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (Mathf.FloorToInt(GameManager.instance.player.transform.position.y - transform.position.y) > 1) {//Clean Up
+        if (GameManager.instance.player.transform.position.y - transform.position.y > 2) {//Clean Up
             Destroy(gameObject);
         }
     }

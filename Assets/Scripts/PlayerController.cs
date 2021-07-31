@@ -47,6 +47,10 @@ public class PlayerController : MonoBehaviour {
 
                 GetComponent<Rigidbody>().velocity = new Vector3(0, 1 * jumpHeight, 0);
             } else if (other.gameObject.CompareTag("Enemy")) {
+                if (_pum.barrier.activeSelf) {
+                    Destroy(other.gameObject);
+                    return;
+                }
                 GetComponent<BoxCollider>().enabled = false;
                 transform.GetChild(0).GetComponent<CapsuleCollider>().enabled = false;
                 StartCoroutine("touchEnemy");

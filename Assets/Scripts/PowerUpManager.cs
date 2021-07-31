@@ -5,7 +5,7 @@ using UnityEngine;
 public class PowerUpManager : MonoBehaviour {
     public float[] timeLeft = new float[6];
     public MovementController _mc;
-    public GameObject _vignette;
+    public GameObject vig, barrier;
     void Start() {
     }
 
@@ -25,6 +25,11 @@ public class PowerUpManager : MonoBehaviour {
         if (GameManager.instance.rushStatus == GameManager.sugarRushStatus.Charging) {
             switch (type) {
                 case 0: //Macaron
+                    foreach (GameObject e in GameObject.FindGameObjectsWithTag("Enemy")) {
+                        if (Random.Range(0, 2) == 1) { //Thanos the enemies
+                            Destroy(e);
+                        }
+                    }
                     break;
                 case 1: //Doughnut
                     if (timeLeft[type] < 1) {
@@ -33,14 +38,17 @@ public class PowerUpManager : MonoBehaviour {
                     timeLeft[type] = 15;
                     break;
                 case 2: //Cheesecake
-
+                    barrier.SetActive(true);
                     timeLeft[type] = 10;
                     break;
                 case 3: //Apple
+                    foreach (GameObject e in GameObject.FindGameObjectsWithTag("Platform")) {
+                        e.transform.localScale -= new Vector3(e.transform.localScale.x * 0.2f, e.transform.localScale.y * 0.2f, e.transform.localScale.z * 0.2f);
+                    }
                     break;
                 case 4: //Carrot
                     if (timeLeft[type] < 1) {
-                        _vignette.SetActive(true);
+                        vig.SetActive(true);
                     }
                     timeLeft[type] = 5;
                     break;
@@ -62,11 +70,12 @@ public class PowerUpManager : MonoBehaviour {
                 Time.timeScale = 1f;
                 break;
             case 2: //Cheesecake
+                barrier.SetActive(false);
                 break;
             case 3: //Apple
                 break;
             case 4: //Carrot
-                _vignette.SetActive(false);
+                vig.SetActive(false);
                 break;
             case 5: //Grape
                 _mc.rotateSpeed = 30f;
