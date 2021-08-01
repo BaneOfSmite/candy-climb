@@ -9,9 +9,11 @@ using TMPro;
 public class MenuManager : MonoBehaviour {
     public Slider musicSlider, effectSlider;
     private AchievementManager _am;
-    public TextMeshProUGUI musicValue, effectValue;
+    public TextMeshProUGUI musicValue, effectValue, howToPlayTitle, howToPlayPageNumber;
     public AudioMixer volumeController;
-    public GameObject optionMenu, achievementMenu, deathScreen;
+    public GameObject optionMenu, achievementMenu, deathScreen, howToPlay;
+    public GameObject[] howToPlayPages;
+    private int howToPlayCurrent = 0;
     public bool isMainMenu = true;
 
     void Start() {
@@ -58,20 +60,65 @@ public class MenuManager : MonoBehaviour {
             case 6: //Options
                 optionMenu.SetActive(true);
                 achievementMenu.SetActive(false);
+                howToPlay.SetActive(false);
                 GetComponent<Animator>().SetBool("Open", true);
                 break;
             case 7: //Achievements
                 optionMenu.SetActive(false);
                 achievementMenu.SetActive(true);
+                howToPlay.SetActive(false);
                 GetComponent<Animator>().SetBool("Open", true);
                 break;
             case 8: //Return to base Menu
                 GetComponent<Animator>().SetBool("Open", false);
                 break;
-            //The rest is finished later, forgotten 😅\\
-            case 9: //In-game options button
-                
+            //The rest is finished later, forgotten at the start...😅\\
+            case 9: //How To Play
+                howToPlayPageNumber.text = "Page " + (howToPlayCurrent + 1) + "/" + howToPlayPages.Length;
+                optionMenu.SetActive(false);
+                achievementMenu.SetActive(false);
+                howToPlay.SetActive(true);
+                GetComponent<Animator>().SetBool("Open", true);
                 break;
+            case 10: //In-game options button
+
+                break;
+        }
+    }
+
+    public void cycleHowToPlayPage(bool isForward) {
+        if (isForward) {
+            howToPlayCurrent++;
+            if (howToPlayCurrent == howToPlayPages.Length) {
+                howToPlayCurrent = 0;
+            }
+        } else {
+            howToPlayCurrent--;
+            if (howToPlayCurrent < 0) {
+                howToPlayCurrent = howToPlayPages.Length - 1;
+            }
+        }
+        switch (howToPlayCurrent) {
+            case 0:
+                howToPlayTitle.text = "Controls";
+                break;
+            case 1:
+                howToPlayTitle.text = "Objective";
+                break;
+            case 2:
+                howToPlayTitle.text = "Collectables";
+                break;
+            default:
+                howToPlayTitle.text = "Sugar Rush";
+                break;
+        }
+        howToPlayPageNumber.text = "Page " + (howToPlayCurrent + 1) + "/" + howToPlayPages.Length;
+        for (int i = 0; i < howToPlayPages.Length; i++) {
+            if (i != howToPlayCurrent) {
+                howToPlayPages[i].SetActive(false);
+            } else {
+                howToPlayPages[i].SetActive(true);
+            }
         }
     }
 
