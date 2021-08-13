@@ -14,7 +14,7 @@ public class PlatformGenerator : MonoBehaviour {
     private void Start() {
         GameManager gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>(); //Difficulity Scaling
         heightMultiplier += ((gm.difficulity - 1) * 0.5f); //Multiplier
-        if (spawnOffSet) {
+        if (spawnOffSet) { //For alternating the starting height positions of the clouds
             spawnHeight = heightMultiplier * 0.8f;
         }
 
@@ -25,13 +25,13 @@ public class PlatformGenerator : MonoBehaviour {
 
             //Managing the newly spawned cloud\\
             spawned.GetComponent<MeshRenderer>().material = colorRng[Random.Range(0, colorRng.Length)]; //Random Cloud Color
-            spawned.transform.parent = gameObject.transform;
+            spawned.transform.SetParent(transform);
             spawned.transform.localRotation = Quaternion.identity;
             spawned.transform.Rotate(0, 90, 0);
             spawned.transform.localScale = new Vector3(spawned.transform.localScale.x * scaleOffSet, spawned.transform.localScale.y * scaleOffSet, spawned.transform.localScale.z * scaleOffSet);
             spawned.transform.localPosition = new Vector3(0, spawnHeight, Random.Range(-1.5f, 1.5f));
             spawnHeight += (heightMultiplier*2); //Applying the height/difficulity multiplier
-            if (spawnHeight > 73.2f) {
+            if (spawnHeight > 73.2f) { //To ensure the clouds do not spawn higher than the space on the wall.
                 break;
             }
         }

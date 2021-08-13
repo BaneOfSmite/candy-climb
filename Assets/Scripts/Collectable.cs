@@ -10,13 +10,14 @@ public class Collectable : MonoBehaviour {
 
     void Start() {
         if (currentType == collectableNames.Null) {
+            //If the collectable type is not set, delete it
             Destroy(gameObject);
         }
     }
 
     void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("Player")) {
-            PlayerController.instance.collectedCollectable(gameObject);
+            PlayerController.instance.collectedCollectable(gameObject); //When player touches the collectable, trigger the collectedCollectable function in playerController Script
         }
     }
 }

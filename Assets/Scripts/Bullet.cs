@@ -12,15 +12,15 @@ public class Bullet : MonoBehaviour {
         StartCoroutine("hitObject");
     }
     void Update() {
-        transform.position += dir.normalized * flySpeed * Time.deltaTime;
+        transform.position += dir.normalized * flySpeed * Time.deltaTime; //Move the bullet to the enemy
     }
 
     IEnumerator hitObject() {
-        yield return new WaitForSecondsRealtime(Vector3.Distance(target.transform.position, transform.position) / flySpeed);
+        yield return new WaitForSeconds(Vector3.Distance(target.transform.position, transform.position) / flySpeed); //Wait for the bullet to fly to the enemy
         if (target != null) {
-            GameManager.instance.GetComponent<AchievementManager>().toSave.setEnemiesKilled(GameManager.instance.GetComponent<AchievementManager>().toSave.getEnemiesKilled()+1);
-            Destroy(target);
+            GameManager.instance.GetComponent<AchievementManager>().toSave.setEnemiesKilled(GameManager.instance.GetComponent<AchievementManager>().toSave.getEnemiesKilled()+1); //Increase achievement count of enemies killed.
+            Destroy(target); //Delete enemy if it hasn't been deleted yet
         }
-        Destroy(gameObject);
+        Destroy(gameObject); //Destroy bullet
     }
 }

@@ -10,10 +10,11 @@ public class Platform : MonoBehaviour {
         int rngPercentage = Random.Range(0, 100);
         if (rngPercentage < 16) { //Rng chance to spawn collectable
             if (rngPercentage < 8f) {
-                spawnLoc = transform.position + new Vector3(0, 0.05f, 0);
-                GameObject spawned = Instantiate(collectablesObject[Random.Range(0, collectablesObject.Length)], spawnLoc, Quaternion.identity);
-                spawned.transform.LookAt(new Vector3(0, transform.position.y, 0));
+                spawnLoc = transform.position + new Vector3(0, 0.05f, 0); //Defining a new spawn location, .05 unit above the tranform.
+                GameObject spawned = Instantiate(collectablesObject[Random.Range(0, collectablesObject.Length)], spawnLoc, Quaternion.identity); //Spawn a random object from array.
+                spawned.transform.LookAt(new Vector3(0, transform.position.y, 0)); //Rotate spawned object towards to center.
 
+                //Additional offset for some collectables due to size\\
                 if (spawned.GetComponent<Collectable>().currentType != Collectable.collectableNames.Macaron) {
                     spawned.transform.Rotate(new Vector3(10, 50, 10));
 
@@ -25,10 +26,10 @@ public class Platform : MonoBehaviour {
                         spawned.transform.position += new Vector3(0, 0.05f, 0);
                     }
                 }
-                spawned.transform.SetParent(transform);
-            } else if (GameManager.instance.rushStatus == GameManager.sugarRushStatus.Charging) {
+                spawned.transform.SetParent(transform); //Set parent of the new spawned object to the transform
+            } else if (GameManager.instance.rushStatus == GameManager.sugarRushStatus.Charging) { //Checking if sugarRush meter is charging
                 spawnLoc = transform.position + new Vector3(0, 0.2f, 0);
-                GameObject enemy = Instantiate(enemies[Random.Range(0, enemies.Length)], spawnLoc, Quaternion.identity);
+                GameObject enemy = Instantiate(enemies[Random.Range(0, enemies.Length)], spawnLoc, Quaternion.identity); //Spawn random enemy sprite.
                 enemy.transform.LookAt(new Vector3(0, transform.position.y, 0));
                 enemy.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                 enemy.transform.SetParent(transform);

@@ -10,7 +10,7 @@ public class SelfDelete : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (transform.position.y < (Camera.main.transform.position.y - 15)) {
+        if (transform.position.y < (Camera.main.transform.position.y - 15)) { //Destroy object when they are below the camera by 15 units
             Destroy(gameObject);
         }
     }

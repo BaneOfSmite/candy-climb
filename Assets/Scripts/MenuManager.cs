@@ -8,35 +8,25 @@ using TMPro;
 
 public class MenuManager : MonoBehaviour {
     public Slider musicSlider, effectSlider;
-    private AchievementManager _am;
+    public AchievementManager _am;
     public TextMeshProUGUI musicValue, effectValue, howToPlayTitle, howToPlayPageNumber;
     public AudioMixer volumeController;
     public GameObject optionMenu, achievementMenu, deathScreen, howToPlay;
     public GameObject[] howToPlayPages;
     private int howToPlayCurrent = 0;
     public bool isMainMenu = true;
+    private float _currentTimeScale = 1;
 
     void Start() {
-        if (isMainMenu) {
-            _am = GetComponent<AchievementManager>();
-        } else {
-            _am = AchievementManager.instance;
-        }
-        musicSlider.value = _am.toSave.getMusic();
-        int toDisplay = Mathf.RoundToInt(((musicSlider.value + 80) / 80) * 100);
-        musicValue.text = toDisplay.ToString();
-
-        effectSlider.value = _am.toSave.getEffect();
-        toDisplay = Mathf.RoundToInt(((effectSlider.value + 80) / 80) * 100);
-        effectValue.text = toDisplay.ToString();
         updateAudioMixer();
     }
 
     public void inGameButton(int id) {
         switch (id) {
-            //1-4 GameOver Buttons\\
+            //Game Scene Buttons\\
             case 1: //Replay
-                AchievementManager.instance.SaveData();
+                Time.timeScale = 1;
+                _am.SaveData();
                 SceneManager.LoadScene(1);
                 break;
             case 2: //Achievements
@@ -44,15 +34,28 @@ public class MenuManager : MonoBehaviour {
                 achievementMenu.SetActive(true);
                 break;
             case 3: //Home
-                AchievementManager.instance.SaveData();
+                Time.timeScale = 1;
+                _am.SaveData();
                 SceneManager.LoadScene(0);
                 break;
             case 4: //Return To Death Menu
                 deathScreen.SetActive(true);
                 achievementMenu.SetActive(false);
                 break;
+            case 10: //Pause
+                Time.timeScale = 0;
+                GameManager.instance.isPaused = true;
+                optionMenu.SetActive(true);
+                break;
+            case 11: //Resume
+                Time.timeScale = _currentTimeScale;
+                GameManager.instance.isPaused = false;
+                optionMenu.SetActive(false);
+                break;
 
-            //5-8 Main Menu's Button Controller\\
+
+
+            //Main Menu's Button\\
             case 5: //Play
                 _am.SaveData();
                 SceneManager.LoadSceneAsync(1);
@@ -72,7 +75,6 @@ public class MenuManager : MonoBehaviour {
             case 8: //Return to base Menu
                 GetComponent<Animator>().SetBool("Open", false);
                 break;
-            //The rest is finished later, forgotten at the start...😅\\
             case 9: //How To Play
                 howToPlayPageNumber.text = "Page " + (howToPlayCurrent + 1) + "/" + howToPlayPages.Length;
                 optionMenu.SetActive(false);
@@ -80,14 +82,23 @@ public class MenuManager : MonoBehaviour {
                 howToPlay.SetActive(true);
                 GetComponent<Animator>().SetBool("Open", true);
                 break;
-            case 10: //In-game options button
-
+            case 12: //Reset Achievement
+                for (int i = 0; i < _am.toSave.Achievements.Length; i++) {
+                    _am.toSave.Achievements[i] = 0;
+                }
+                _am.toSave.setScore(0);
+                _am.toSave.setSugarRush(0);
+                _am.toSave.setTotalCollected(0);
+                _am.toSave.setHealthyVomit(0);
+                _am.toSave.setEnemiesKilled(0);
+                _am.SaveData();
+                SceneManager.LoadScene(0);
                 break;
         }
     }
 
-    public void cycleHowToPlayPage(bool isForward) {
-        if (isForward) {
+    public void cycleHowToPlayPage(bool isForward) { //Manages the HowToPlay Menu
+        if (isForward) { //Is forward button pressed
             howToPlayCurrent++;
             if (howToPlayCurrent == howToPlayPages.Length) {
                 howToPlayCurrent = 0;
@@ -98,7 +109,7 @@ public class MenuManager : MonoBehaviour {
                 howToPlayCurrent = howToPlayPages.Length - 1;
             }
         }
-        switch (howToPlayCurrent) {
+        switch (howToPlayCurrent) { //Switches the title
             case 0:
                 howToPlayTitle.text = "Controls";
                 break;
@@ -113,7 +124,7 @@ public class MenuManager : MonoBehaviour {
                 break;
         }
         howToPlayPageNumber.text = "Page " + (howToPlayCurrent + 1) + "/" + howToPlayPages.Length;
-        for (int i = 0; i < howToPlayPages.Length; i++) {
+        for (int i = 0; i < howToPlayPages.Length; i++) { //Change the page
             if (i != howToPlayCurrent) {
                 howToPlayPages[i].SetActive(false);
             } else {
@@ -122,21 +133,21 @@ public class MenuManager : MonoBehaviour {
         }
     }
 
-    public void setMusicVolume(float sliderValue) {
-        int toDisplay = Mathf.RoundToInt(((musicSlider.value + 80) / 80) * 100);
+    public void setMusicVolume(float sliderValue) { //Updating the music volume's UI and text element
+        int toDisplay = Mathf.FloorToInt(musicSlider.value * 100);
         musicValue.text = toDisplay.ToString();
-        volumeController.SetFloat("musicVolume", musicSlider.value);
-        _am.toSave.setMusic(Mathf.RoundToInt(musicSlider.value));
+        _am.toSave.setMusic(musicSlider.value);
+        updateAudioMixer();
     }
-    public void setEffectVolume(float sliderValue) {
-        int toDisplay = Mathf.RoundToInt(((effectSlider.value + 80) / 80) * 100);
+    public void setEffectVolume(float sliderValue) { //Updating the effect volume's UI and text element
+        int toDisplay = Mathf.FloorToInt(effectSlider.value * 100);
         effectValue.text = toDisplay.ToString();
-        volumeController.SetFloat("effectVolume", effectSlider.value);
-        _am.toSave.setEffect(Mathf.RoundToInt(effectSlider.value));
+        _am.toSave.setEffect(effectSlider.value);
+        updateAudioMixer();
     }
 
-    private void updateAudioMixer() {
-        volumeController.SetFloat("musicVolume", musicSlider.value);
-        volumeController.SetFloat("effectVolume", effectSlider.value);
+    private void updateAudioMixer() { //Update the actual volume in the AudioMixer
+        volumeController.SetFloat("musicVolume", Mathf.Log10(musicSlider.value) * 20);
+        volumeController.SetFloat("effectVolume", Mathf.Log10(effectSlider.value) * 20);
     }
 }

@@ -1,4 +1,4 @@
-﻿public class SaveDataFile {
+﻿public class SaveDataFile { //This script is just a collection of data to be saved/stored.
     //Variables
     public float score;
     public int[] Achievements;
@@ -7,8 +7,7 @@
     public int totalCollected;
     public int enemiesKilled;
 
-    public int music;
-    public int effect;
+    public float music, effect;
 
     //Set Functions
     public void setScore(float _score) {
@@ -30,10 +29,10 @@
     public void setEnemiesKilled(int _enemiesKilled) {
         this.enemiesKilled = _enemiesKilled;
     }
-    public void setMusic(int _music) {
+    public void setMusic(float _music) {
         this.music = _music;
     }
-    public void setEffect(int _effect) {
+    public void setEffect(float _effect) {
         this.effect = _effect;
     }
 
@@ -57,10 +56,10 @@
     public int getEnemiesKilled() {
         return this.enemiesKilled;
     }
-    public int getMusic() {
+    public float getMusic() {
         return this.music;
     }
-    public int getEffect() {
+    public float getEffect() {
         return this.effect;
     }
 }
